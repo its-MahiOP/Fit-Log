@@ -1,9 +1,14 @@
 import Hero from "@/components/homepage/Hero";
+import WorkoutGrid from "@/components/homepage/WorkoutGrid";
+import { getWorkouts } from "@/services/workoutService";
 
-const page = () => {
-    return <div>
-      <Hero/>
-    </div>;
-};
+export default async function HomePage() {
+    const workouts = await getWorkouts();
 
-export default page;
+    return (
+        <main className="min-h-screen bg-[#0d0e12] pb-16">
+            <Hero />
+            <WorkoutGrid workouts={workouts} />
+        </main>
+    );
+}
