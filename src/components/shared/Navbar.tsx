@@ -21,10 +21,10 @@ const Navbar = ({ planCount = 0, savedCount = 0 }: NavbarProps) => {
     ];
 
     return (
-        <header className="sticky top-0 z-50 w-full bg-[#0d0e12] px-6 py-4 border-b border-gray-900/50">
+        <header className="sticky top-0 z-50 w-full border-b border-gray-900/50 bg-[#0d0e12] px-6 py-4">
             <div className="mx-auto flex max-w-7xl items-center justify-between">
+                {/* Responsive Hamburger Menu & Logo */}
                 <div className="flex items-center gap-3">
-                    {/* Responsive Hamburger */}
                     <button
                         onClick={() => setIsOpen(!isOpen)}
                         type="button"
@@ -64,7 +64,6 @@ const Navbar = ({ planCount = 0, savedCount = 0 }: NavbarProps) => {
                         )}
                     </button>
 
-                    {/* Logo & Brand Name */}
                     <Link href="/" className="flex items-center gap-3">
                         <Image
                             src={logo}
@@ -80,7 +79,7 @@ const Navbar = ({ planCount = 0, savedCount = 0 }: NavbarProps) => {
                     </Link>
                 </div>
 
-                {/* Middle: Navigation Links */}
+                {/* Middle: Navigation Links (Desktop) */}
                 <nav className="hidden items-center gap-3 md:flex">
                     {navLinks.map((link) => {
                         const isActive = pathname === link.href;
@@ -102,21 +101,27 @@ const Navbar = ({ planCount = 0, savedCount = 0 }: NavbarProps) => {
 
                 {/* Status Badges */}
                 <div className="flex items-center gap-6 text-sm font-medium">
-                    {/* Plan Badge */}
-                    <div className="flex items-center gap-2 text-gray-300">
+                    {/* Plan Badge Counter */}
+                    <Link
+                        href="/my-plan"
+                        className="flex items-center gap-2 text-gray-300 transition-opacity hover:opacity-80"
+                    >
                         <span>Plan</span>
                         <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#ccff00] text-xs font-bold text-black">
                             {planCount}
                         </span>
-                    </div>
+                    </Link>
 
-                    {/* Saved Badge */}
-                    <div className="flex items-center gap-2 text-gray-300">
+                    {/* Saved Badge Counter */}
+                    <Link
+                        href="/my-plan"
+                        className="flex items-center gap-2 text-gray-300 transition-opacity hover:opacity-80"
+                    >
                         <span>Saved</span>
                         <span className="flex h-6 w-6 items-center justify-center rounded-full border border-gray-700 bg-transparent text-xs font-semibold text-gray-300">
                             {savedCount}
                         </span>
-                    </div>
+                    </Link>
                 </div>
             </div>
 
