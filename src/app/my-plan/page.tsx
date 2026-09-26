@@ -260,7 +260,9 @@ function MyPlanContent() {
                                 {/* Mark as Done Button */}
                                 {activeTab === "plan" && (
                                     <button
-                                        onClick={() => removeFromPlan(item.id)}
+                                        onClick={() =>
+                                            removeFromPlan(item.id, true)
+                                        }
                                         className="inline-flex items-center gap-1.5 rounded-xl bg-[#ccff00] px-4 py-2 text-xs font-bold text-black transition-transform hover:bg-[#b8e600] active:scale-95"
                                     >
                                         <svg

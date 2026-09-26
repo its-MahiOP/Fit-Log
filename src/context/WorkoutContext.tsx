@@ -8,7 +8,7 @@ interface WorkoutContextType {
     savedWorkouts: Workout[];
     addToPlan: (workout: Workout) => void;
     addToSaved: (workout: Workout) => void;
-    removeFromPlan: (id: number) => void;
+    removeFromPlan: (id: number, isMarkAsDone?: boolean) => void;
     removeFromSaved: (id: number) => void;
     toastMessage: string | null;
 }
@@ -20,18 +20,57 @@ export const WorkoutProvider = ({
 }: {
     children: React.ReactNode;
 }) => {
-    const [planWorkouts, setPlanWorkouts] = useState<Workout[]>([]);
-    const [savedWorkouts, setSavedWorkouts] = useState<Workout[]>([]);
+    // Lazy initial state for planWorkouts
+    const [planWorkouts, setPlanWorkouts] = useState<Workout[]>(() => {
+        if (typeof window === "undefined") return [];
+        try {
+            const savedPlan = localStorage.getItem("fitlog_plan");
+            return savedPlan ? JSON.parse(savedPlan) : [];
+        } catch {
+            return [];
+        }
+    });
+
+    // Lazy initial state for savedWorkouts
+    const [savedWorkouts, setSavedWorkouts] = useState<Workout[]>(() => {
+        if (typeof window === "undefined") return [];
+        try {
+            const savedSaved = localStorage.getItem("fitlog_saved");
+            return savedSaved ? JSON.parse(savedSaved) : [];
+        } catch {
+            return [];
+        }
+    });
+
     const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+    // Sync state changes to localStorage whenever state updates
+    useEffect(() => {
+        try {
+            localStorage.setItem("fitlog_plan", JSON.stringify(planWorkouts));
+        } catch {
+            // Storage access blocked or quota exceeded
+        }
+    }, [planWorkouts]);
+
+    useEffect(() => {
+        try {
+            localStorage.setItem("fitlog_saved", JSON.stringify(savedWorkouts));
+        } catch {
+            // Storage access blocked or quota exceeded
+        }
+    }, [savedWorkouts]);
 
     const showToast = (msg: string) => {
         setToastMessage(msg);
-        setTimeout(() => {
-            setToastMessage(null);
-        }, 3000);
+        setTimeout(() => setToastMessage(null), 3000);
     };
 
     const addToPlan = (workout: Workout) => {
+        if (planWorkouts.length >= 5) {
+            showToast("Daily limit reached! (Cap of 5 workouts)");
+            return;
+        }
         if (planWorkouts.some((item) => item.id === workout.id)) {
             showToast(`${workout.name} is already in your plan!`);
             return;
@@ -49,12 +88,24 @@ export const WorkoutProvider = ({
         showToast(`Saved "${workout.name}" for later`);
     };
 
-    const removeFromPlan = (id: number) => {
-        setPlanWorkouts((prev) => prev.filter((item) => item.id !== id));
+    const removeFromPlan = (id: number, isMarkAsDone: boolean = false) => {
+        const item = planWorkouts.find((w) => w.id === id);
+        setPlanWorkouts((prev) => prev.filter((w) => w.id !== id));
+        if (item) {
+            if (isMarkAsDone) {
+                showToast(`Completed "${item.name}"! Great work!`);
+            } else {
+                showToast(`Removed "${item.name}" from today's plan`);
+            }
+        }
     };
 
     const removeFromSaved = (id: number) => {
-        setSavedWorkouts((prev) => prev.filter((item) => item.id !== id));
+        const item = savedWorkouts.find((w) => w.id === id);
+        setSavedWorkouts((prev) => prev.filter((w) => w.id !== id));
+        if (item) {
+            showToast(`Removed "${item.name}" from saved list`);
+        }
     };
 
     return (

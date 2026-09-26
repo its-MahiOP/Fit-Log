@@ -25,7 +25,7 @@ const WorkoutDetailClient = ({ workout }: WorkoutDetailClientProps) => {
         <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start">
                 {/* Left Side */}
-                <div className="relative h-[400px] w-full overflow-hidden rounded-2xl bg-[#12141a] sm:h-[500px] lg:col-span-5 lg:h-[620px]">
+                <div className="relative h-100 w-full overflow-hidden rounded-2xl bg-[#12141a] sm:h-125 lg:col-span-5 lg:h-155">
                     <Image
                         src={workout.image}
                         alt={workout.name}

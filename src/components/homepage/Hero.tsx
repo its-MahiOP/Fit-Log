@@ -7,7 +7,13 @@ const Hero = () => {
     const scrollToLibrary = () => {
         const librarySection = document.getElementById("library");
         if (librarySection) {
-            librarySection.scrollIntoView({ behavior: "smooth" });
+            const elementPosition = librarySection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - 80;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth",
+            });
         }
     };
 
@@ -38,7 +44,7 @@ const Hero = () => {
                         <div className="mt-8">
                             <button
                                 onClick={scrollToLibrary}
-                                className="inline-flex items-center justify-center cursor-pointer rounded-lg bg-[#ccff00] px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-black transition-all duration-200 hover:bg-[#b8e600] active:scale-95"
+                                className="inline-flex cursor-pointer items-center justify-center rounded-lg bg-[#ccff00] px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-black transition-all duration-200 hover:bg-[#b8e600] active:scale-95"
                             >
                                 BROWSE WORKOUTS
                             </button>
