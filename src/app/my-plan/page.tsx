@@ -216,7 +216,7 @@ function MyPlanContent() {
                                             </svg>
                                             {item.duration} min
                                         </span>
-
+{/* ABCD */}
                                         <span className="flex items-center gap-1">
                                             <svg
                                                 className="h-3.5 w-3.5 fill-gray-400"
