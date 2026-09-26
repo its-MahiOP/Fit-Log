@@ -79,7 +79,7 @@ const Navbar = ({ planCount = 0, savedCount = 0 }: NavbarProps) => {
                     </Link>
                 </div>
 
-                {/* Middle: Navigation Links (Desktop) */}
+                {/* Navigation Links (Desktop) */}
                 <nav className="hidden items-center gap-3 md:flex">
                     {navLinks.map((link) => {
                         const isActive = pathname === link.href;
@@ -114,7 +114,7 @@ const Navbar = ({ planCount = 0, savedCount = 0 }: NavbarProps) => {
 
                     {/* Saved Badge Counter */}
                     <Link
-                        href="/my-plan"
+                        href="/my-plan?tab=saved"
                         className="flex items-center gap-2 text-gray-300 transition-opacity hover:opacity-80"
                     >
                         <span>Saved</span>

@@ -47,7 +47,7 @@ const Hero = () => {
 
                     {/* Right Banner Image */}
                     <div className="relative flex justify-center lg:col-span-5 lg:justify-end">
-                        <div className="relative h-64 w-full sm:h-80 md:h-96 lg:h-[400px]">
+                        <div className="relative h-64 w-full sm:h-80 md:h-96 lg:h-100">
                             <Image
                                 src={banner}
                                 alt="FitLog Training Hero Image"

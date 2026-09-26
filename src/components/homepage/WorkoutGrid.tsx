@@ -1,4 +1,3 @@
-// src/components/home/WorkoutGrid.tsx
 import { Workout } from "@/types/workout";
 import WorkoutCard from "./WorkoutCard";
 
