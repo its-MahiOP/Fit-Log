@@ -4,7 +4,7 @@ export async function getWorkouts(): Promise<Workout[]> {
     const res = await fetch("https://api.abcz.workers.dev/api/fitlog", {
         next: { revalidate: 3600 },
     });
-    // if (!res.ok) {throw new Error("Failed to fetch workouts")};
+    if (!res.ok) {throw new Error("Failed to fetch workouts")};
     return res.json();
 }
 
@@ -12,6 +12,6 @@ export async function getWorkoutById(id: string): Promise<Workout> {
     const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`, {
         next: { revalidate: 3600 },
     });
-    // if (!res.ok) {throw new Error("Failed to fetch workout details")};
+    if (!res.ok) {throw new Error("Failed to fetch workout details")};
     return res.json();
 }
