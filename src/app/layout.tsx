@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import NavbarWrapper from "@/components/shared/NavbarWrapper";
-import Footer from "@/components/shared/Footeer";
+import Footer from "@/components/shared/Footer";
 import Toast from "@/components/shared/Toast";
 import { WorkoutProvider } from "@/context/WorkoutContext";
 

@@ -110,7 +110,7 @@ function MyPlanContent() {
                         onClick={() => handleTabChange("plan")}
                         className={`rounded-lg px-5 py-2 text-xs font-bold transition-all ${
                             activeTab === "plan"
-                                ? "bg-[#1f232e] text-white shadow-md"
+                                ? "bg-[#1d270c] text-[#ccff00]"
                                 : "text-gray-400 hover:text-white"
                         }`}
                     >
@@ -120,7 +120,7 @@ function MyPlanContent() {
                         onClick={() => handleTabChange("saved")}
                         className={`rounded-lg px-5 py-2 text-xs font-bold transition-all ${
                             activeTab === "saved"
-                                ? "bg-[#1f232e] text-white shadow-md"
+                                ? "bg-[#1d270c] text-[#ccff00]"
                                 : "text-gray-400 hover:text-white"
                         }`}
                     >
